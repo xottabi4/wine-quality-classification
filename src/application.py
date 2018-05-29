@@ -33,10 +33,6 @@ def performClasification(pathToDataSet):
     data = pd.read_csv(pathToDataSet, sep=";")
     labels = data.quality
     mappedLabels = mapLabels(labels)
-    # print(mappedLabels)
-    # le = preprocessing.LabelEncoder()
-    # le.fit(mappedLabels)
-    # print(le.classes_)
     data = data.drop("quality", axis=1)
     scaledData = preprocessing.scale(data)
     trainData, testData, trainLabels, testLabels = train_test_split(scaledData, mappedLabels, test_size=0.3)
@@ -57,7 +53,6 @@ def classifyData(clf, testData, testLabels, trainData, trainLabels, metric):
     clf.fit(trainData, trainLabels)
     confidence = clf.score(testData, testLabels)
     print("For metric: {} confidence score is: {}".format(metric, confidence))
-    # testPredictions = clf.predict(testData)
 
 
 if __name__ == '__main__':
